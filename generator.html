@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">PASSWORD GENERATOR</h2>
+        </div>
+      
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        
+        <div>
+            <label for="letters" class="block text-sm font-medium leading-6 text-gray-900">How many letters would you like in your password?</label>
+            <div class="mt-2">
+              <input id="letters" name="letters" type="number" min="1" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+        
+        <div>
+            <label for="symbols" class="block text-sm font-medium leading-6 text-gray-900">How many symbols would you like in your password?</label>
+            <div class="mt-2">
+              <input id="symbols" name="symbols" type="number" min="0" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div>
+            
+
+        <div>
+            <label for="letters" class="block text-sm font-medium leading-6 text-gray-900">How many numbers would you like in your password?</label>
+            <div class="mt-2">
+              <input id="numbers" name="numbers" type="number" min="0" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            </div><br>
+            
+        <div>
+            <button onclick="generatePassword()"s class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">GENERATE</button>
+        </div>
+        
+        
+
+        <p id="result"></p>
+
+        <script>
+        const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        const numbers = '0123456789'.split('');
+        const symbols = '!#$%&()*+'.split('');
+
+        function generatePassword() {
+            const nrLetters = parseInt(document.getElementById("letters").value);
+            const nrSymbols = parseInt(document.getElementById("symbols").value);
+            const nrNumbers = parseInt(document.getElementById("numbers").value);
+
+            const passwordList = [];
+
+            // Select random letters
+            for (let i = 0; i < nrLetters; i++) {
+                const r = Math.floor(Math.random() * letters.length);
+                passwordList.push(letters[r]);
+            }
+
+            // Select random numbers
+            for (let i = 0; i < nrNumbers; i++) {
+                const r = Math.floor(Math.random() * numbers.length);
+                passwordList.push(numbers[r]);
+            }
+
+            // Select random symbols
+            for (let i = 0; i < nrSymbols; i++) {
+                const r = Math.floor(Math.random() * symbols.length);
+                passwordList.push(symbols[r]);
+            }
+
+            // Shuffle the password list
+            passwordList.sort(() => Math.random() - 0.5);
+
+            // Combine shuffled characters into final password
+            const password = passwordList.join('');
+
+            // Display the generated password
+            
+            document.getElementById("result").innerHTML = `Your generated password is :  ${password}`;
+        }
+        </script>
+        </div>
+    </div>
+</body>
+
+</html>
